@@ -246,7 +246,7 @@ relaying back to the user. This is the #1 most common mistake.**
 2. Write the `Say:` text in the **correct language per the table above**.
 3. Run: `python3 tools/tts.py "<say_text>"`
 4. Do not inline or export API keys — rely on runtime environment.
-5. The output file is **always** `/app/workspace/tts_output.mp3`. Use this exact path as media in every `message` call.
+5. The script prints the output file path to stdout (unique per call, e.g. `/app/workspace/tts_143052_a1b2.mp3`). **Use that exact printed path** as media in every `message` call. Never hardcode a filename.
 
 ### User → Provider audio
 - `say_text` must be the exact target-language phrase from `Say`.
