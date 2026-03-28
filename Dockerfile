@@ -8,4 +8,4 @@ ENV PATH="/app/.venv/bin:$PATH"
 ENV NANOBOT_CONFIG_DIR=/app
 ENV PORT=8080
 EXPOSE ${PORT}
-CMD ["nanobot", "gateway"]
+CMD ["python", "scripts/run_gateway.py"]
