@@ -4,12 +4,13 @@ import argparse
 import json
 import os
 import sys
+from datetime import datetime
 from pathlib import Path
 from urllib import error, request
 
 VOICE_ID = "21m00Tcm4TlvDq8ikWAM"
 MODEL_ID = "eleven_multilingual_v2"
-OUTPUT_PATH = Path(__file__).resolve().parents[1] / "alert.mp3"
+OUTPUT_DIR = Path(__file__).resolve().parents[1]
 
 
 def text_to_speech(text: str, voice_id: str = VOICE_ID) -> str:
@@ -42,9 +43,11 @@ def text_to_speech(text: str, voice_id: str = VOICE_ID) -> str:
     except error.URLError as exc:
         raise RuntimeError(f"ElevenLabs request failed: {exc.reason}") from exc
 
-    OUTPUT_PATH.parent.mkdir(exist_ok=True)
-    OUTPUT_PATH.write_bytes(audio)
-    return str(OUTPUT_PATH)
+    filename = datetime.now().strftime("msg_%y%m%d_%H%M%S.mp3")
+    output_path = OUTPUT_DIR / filename
+    output_path.parent.mkdir(exist_ok=True)
+    output_path.write_bytes(audio)
+    return str(output_path)
 
 
 if __name__ == "__main__":
