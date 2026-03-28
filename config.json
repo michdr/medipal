@@ -3,6 +3,9 @@
     "openrouter": {
       "apiKey": "${OPENROUTER_API_KEY}",
       "baseURL": "${OPENROUTER_BASE_URL}"
+    },
+    "groq": {
+      "apiKey": "${GROQ_API_KEY}"
     }
   },
   "agents": {
