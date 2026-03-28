@@ -10,18 +10,27 @@ Generates MP3 audio via ElevenLabs.
 python3 tools/tts.py "<text>" [voice_id]
 ```
 
-- `text` — the exact target-language phrase to speak. Must be single-language, no helper text.
+- `text` — the exact phrase to speak. The language depends on relay direction:
+  - **User → Provider**: text is in the **target/foreign language**.
+  - **Provider → User**: text is in the **user's own language** (e.g. English).
+  - Must be single-language, no helper text.
 - `voice_id` — optional ElevenLabs voice ID (default: Rachel).
 - Always writes to `/app/workspace/tts_output.mp3` (fixed path, overwritten each call).
 - Requires `ELEVENLABS_API_KEY` in environment.
 
-### Example
+### Examples
 
+**User → Provider (German):**
 ```
 python3 tools/tts.py "Ich brauche ein Hustenmittel. Ich bin allergisch gegen Penicillin."
 ```
 
-Output: `/app/workspace/tts_output.mp3`
+**Provider → User (English):**
+```
+python3 tools/tts.py "The pharmacist says they only have 50 mg tablets. They're asking if two would work."
+```
+
+Output (both cases): `/app/workspace/tts_output.mp3`
 
 ### Constraints
 

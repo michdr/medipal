@@ -219,17 +219,38 @@ BOT responds → direction: provider→user → language: ENGLISH
 **Every response that contains a phrase or summary MUST call TTS. This is the
 default behavior — non-negotiable. Never output text without audio.**
 
-- Run: `python3 tools/tts.py "<say_text>"`
-- Do not inline or export API keys — rely on runtime environment.
-- The output file is **always** `/app/workspace/tts_output.mp3`. Use this exact path as media in every `message` call.
+### ⛔ STOP — language check before EVERY TTS call
+
+Before calling `text_to_speech`, determine the current relay direction and
+verify the language of `say_text`:
+
+| Direction | `Say:` language | TTS language | Example |
+|-----------|----------------|--------------|---------|
+| User → Provider | Target/foreign language | Target/foreign language | German, Romanian, etc. |
+| **Provider → User** | **User's OWN language** | **User's OWN language** | **English** (if user speaks English) |
+
+**If the direction is Provider → User, the TTS text MUST be in the user's
+own language (e.g. English). NEVER pass foreign-language text to TTS when
+relaying back to the user. This is the #1 most common mistake.**
+
+### Procedure
+
+1. Determine direction: `user→provider` or `provider→user`.
+2. Write the `Say:` text in the **correct language per the table above**.
+3. Run: `python3 tools/tts.py "<say_text>"`
+4. Do not inline or export API keys — rely on runtime environment.
+5. The output file is **always** `/app/workspace/tts_output.mp3`. Use this exact path as media in every `message` call.
 
 ### User → Provider audio
 - `say_text` must be the exact target-language phrase from `Say`.
 - Any text sent with audio must be exactly `say_text`.
 
 ### Provider → User audio
-- `say_text` must be the summary you produced for the user, in their own language.
-- Audio language must match the user's own language.
+- **`say_text` MUST be in the user's own language (e.g. English). NOT the
+  foreign language. This is a voice message TO the user, spoken in THEIR
+  language.**
+- Summarize what the provider said naturally — in the user's own language.
+- Audio language must match the user's own language. Always.
 
 ### Forbidden in `say_text` (both directions)
 - Translations in parentheses
