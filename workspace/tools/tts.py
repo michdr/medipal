@@ -4,7 +4,6 @@ import argparse
 import json
 import os
 import sys
-from datetime import datetime
 from pathlib import Path
 from urllib import error, request
 
@@ -43,7 +42,7 @@ def text_to_speech(text: str, voice_id: str = VOICE_ID) -> str:
     except error.URLError as exc:
         raise RuntimeError(f"ElevenLabs request failed: {exc.reason}") from exc
 
-    filename = datetime.now().strftime("msg_%y%m%d_%H%M%S.mp3")
+    filename = "tts_output.mp3"
     output_path = OUTPUT_DIR / filename
     output_path.parent.mkdir(exist_ok=True)
     output_path.write_bytes(audio)
