@@ -107,6 +107,12 @@ Say: <target-language phrase>
 Audio: <attached audio>
 ```
 
+- **DIRECT ADDRESS: The phrase is spoken directly TO the provider (doctor,
+  pharmacist, waiter). Always use second-person ("you"). Never use
+  third-person ("ask her", "tell him", "ask the pharmacist"). The user's
+  meta-instructions like "ask her if she has X" must become "Do you have X?"**
+  - ❌ "Întrebați-o dacă are alt brand" ("Ask her if she has another brand")
+  - ✅ "Aveți alt brand cu doza de 100 mg?" ("Do you have another brand in 100 mg?")
 - Keep `Say` to 1–3 short sentences (may expand to 4–5 if needed to cover
   medications + allergies).
 - Put life-critical info first (allergy, medication conflict, urgent symptom).
@@ -198,6 +204,7 @@ BOT responds → direction: provider→user → language: ENGLISH
 USER (English voice): "Yes, I'll take two. Ask how much it costs."
 
 BOT responds → direction: user→provider → language: GERMAN
+  (User said "ask how much" → convert to DIRECT question to pharmacist)
   Say: "Ja, ich nehme zwei Tabletten. Was kostet das?"
   + 🔊 German audio
 
