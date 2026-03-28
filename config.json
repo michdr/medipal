@@ -1,0 +1,23 @@
+{
+  "providers": {
+    "openrouter": {
+      "apiKey": "${OPENROUTER_API_KEY}",
+      "baseURL": "${OPENROUTER_BASE_URL}"
+    }
+  },
+  "agents": {
+    "defaults": {
+      "workspace": "./workspace",
+      "provider": "openrouter",
+      "model": "openai/gpt-4o",
+      "temperature": 0.1
+    }
+  },
+  "channels": {
+    "telegram": {
+      "enabled": true,
+      "token": "${TELEGRAM_BOT_TOKEN}",
+      "allowFrom": ["*"]
+    }
+  }
+}

@@ -1,0 +1,8 @@
+[project]
+name = "medipal"
+version = "0.1.0"
+description = "AI-powered medical communication relay for travelers abroad"
+requires-python = ">=3.11"
+dependencies = [
+    "nanobot-ai @ git+https://github.com/HKUDS/nanobot.git",
+]
